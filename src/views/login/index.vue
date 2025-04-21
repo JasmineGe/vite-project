@@ -25,13 +25,14 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { reactive, ref } from 'vue';
 import useUserStore from '@/store/modules/user.ts'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getTime } from '@/utils/time'
 
 let loading = ref(false)
 let userStore = useUserStore()
 let $router = useRouter()
+let $route = useRoute()
 let loginForm = reactive({username: 'admin', password: '111111'})
 let loginForms = ref()
 const validatorUsername = (rule: any, value: any, callback: any) => {
@@ -63,8 +64,12 @@ const login = async () => {
 
   loading.value = true
   try {
+    // 保证登录成功
     await userStore.userLogin(loginForm)
-    $router.push('/')
+    
+    let redirect:any = $route.query.redirect
+    $router.push({path: redirect || '/'})
+
     ElNotification({
       title: 'Success',
       message: `Hi,${getTime()}好！`,

@@ -13,6 +13,7 @@ import "@/styles/index.scss";
 // 引入路由
 import router from "./router";
 import pinia from "./store";
+import './permission'
 
 // 获取应用的实例对象
 const app = createApp(App);
