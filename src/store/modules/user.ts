@@ -1,5 +1,5 @@
-import { reqLogin, reqUserInfo } from "@/api/user";
-import type { loginForm, loginResponseData, userResponseData } from "@/api/user/type"
+import { reqLogin, reqUserInfo, reqLogout } from "@/api/user";
+import type { loginFormData, loginResponseData, userInfoResponseData } from "@/api/user/type"
 import type { UserState } from './types/type'
 import { defineStore } from "pinia";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
@@ -19,7 +19,7 @@ let useUserStore = defineStore('User', {
     // 处理异步逻辑的地方
     actions: {
         // 用户登录的方法
-        async userLogin(data:loginForm)  {
+        async userLogin(data:loginFormData)  {
             let result:loginResponseData = await reqLogin(data)
             if (result.code === 200) {
                 this.token = (result.data as string)
@@ -31,7 +31,7 @@ let useUserStore = defineStore('User', {
         },
         // 获取用户信息
         async userInfo() {
-            let result:userResponseData = await reqUserInfo()
+            let result:userInfoResponseData = await reqUserInfo()
             if (result.code === 200) {
                 this.username = result.data.username
                 this.avatar = result.data.avatar
@@ -41,12 +41,16 @@ let useUserStore = defineStore('User', {
             }
         },
         //退出登录
-        userLogout() {
-            // 目前没有mock退出登录接口：退出登录接口（通知服务器本地用户唯一标识token失效）
-            this.token = ''
-            this.username = ''
-            this.avatar = ''
-            REMOVE_TOKEN()
+        async userLogout() {
+            let result:any = await reqLogout()
+            if (result.code === 200) {
+                // 目前没有mock退出登录接口：退出登录接口（通知服务器本地用户唯一标识token失效）
+                this.token = ''
+                this.username = ''
+                this.avatar = ''
+                REMOVE_TOKEN()
+                return 'ok'
+            }
         }
     }
     // getters: {}

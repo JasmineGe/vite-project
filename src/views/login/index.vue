@@ -5,7 +5,7 @@
       <el-col :span="12" :xs="12">
         <el-form class="login-form" :model="loginForm" :rules="rules" ref="loginForms">
           <h1>Hello</h1>
-          <h2>欢迎来到 Jasmine 运营</h2>
+          <h2>欢迎来到{{ setting.title }}</h2>
           <el-form-item prop="username">
             <el-input :prefix-icon="User" v-model="loginForm.username"></el-input>
           </el-form-item>
@@ -28,6 +28,7 @@ import useUserStore from '@/store/modules/user.ts'
 import { useRouter, useRoute } from 'vue-router'
 import { ElNotification } from 'element-plus'
 import { getTime } from '@/utils/time'
+import setting from '../../setting';
 
 let loading = ref(false)
 let userStore = useUserStore()

@@ -69,7 +69,6 @@ let userStore = useUserStore()
         width: calc(100% - $base-menu-width);
         height: calc(100vh - $base-tabbar-height);
         transition: all .3s;
-        background-color: yellowgreen;
         padding: 20px;
         overflow: auto;
         &.fold {

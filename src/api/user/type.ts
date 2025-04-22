@@ -1,15 +1,24 @@
-export interface loginForm {
+// 定义用户相关数据的ts接口
+export interface loginFormData {
     username: string,
     password: string
 }
-
-interface dataType {
-    token?: string,
-    message?: string
-}
-export interface loginResponseData {
+export interface ResponseData {
     code: number,
-    data: dataType
+    message: string,
+    ok: boolean
+}
+export interface loginResponseData extends ResponseData {
+    data: string
+}
+export interface userInfoResponseData extends ResponseData {
+    data: {
+        routes: string[],
+        buttons: string[],
+        roles: string[],
+        names: string,
+        avatar: string
+    }
 }
 interface userInfoType {
     userId: number,

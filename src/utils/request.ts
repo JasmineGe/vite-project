@@ -19,7 +19,7 @@ request.interceptors.response.use((res) => {
     return res.data
 }, (err) => {
     let message = ''
-    let status = err.response.status
+    let status = err.response ? err.response.status : ''
     switch(status) {
         case 401: 
             message = 'TOKEN过期'
