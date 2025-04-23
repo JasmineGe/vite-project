@@ -52,7 +52,7 @@ let useUserStore = defineStore('User', {
                 return 'ok'
             }
         }
-    }
-    // getters: {}
+    },
+    getters: {}
 })
 export default useUserStore

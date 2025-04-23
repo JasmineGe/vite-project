@@ -1,8 +1,10 @@
 import SvgIcon from "@/components/SvgIcon/index.vue";
 import * as ElementPlusIconsVue from '@element-plus/icons-vue' 
+import Category from './Category/index.vue'
 
 const allGlobalComponents = {
   SvgIcon,
+  Category
 };
 // 对外暴露插件对象
 export default {
