@@ -14,7 +14,8 @@ import "@/styles/index.scss";
 import router from "./router";
 import pinia from "./store";
 import './permission'
-
+// 暗黑模式需要的样式
+import 'element-plus/theme-chalk/dark/css-vars.css'
 // 获取应用的实例对象
 const app = createApp(App);
 // 安装element-plus插件
