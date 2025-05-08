@@ -1,7 +1,7 @@
 <template>
   <el-card style="height: 80px;">
     <el-form inline class="form">
-      <el-form-item label="用户名：">
+      <el-form-item label="用户名">
         <el-input placeholder="请输入用户名" v-model="keyword"></el-input>
       </el-form-item>
       <el-form-item>
