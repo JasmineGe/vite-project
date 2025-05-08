@@ -4,7 +4,7 @@
   <el-popover placement="bottom" title="主题设置" :width="200" trigger="hover">
     <el-form>
       <el-form-item label="主题颜色">
-        <el-color-picker size="small" v-model="color" show-alpha :predefine="predefineColors" />
+        <el-color-picker @change="setColor" size="small" v-model="color" show-alpha :predefine="predefineColors" :teleported="false" />
       </el-form-item>
       <el-form-item label="暗黑模式">
         <el-switch @change="changeDark" size="small" v-model="dark" inline-prompt active-icon="MoonNight" inactive-icon="Sunny" />
@@ -90,6 +90,12 @@ const logout = async () => {
 const changeDark = () => {
   let html = document.documentElement
   dark.value ? html.className = 'dark' : html.className=''
+}
+const setColor = () => {
+  // document.documentElement 是全局变量时
+  let html = document.documentElement
+  // 设置 css 变量
+  html.style.setProperty('--el-color-primary', color.value)
 }
 </script>
 
