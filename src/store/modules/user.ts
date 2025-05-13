@@ -4,7 +4,20 @@ import type { UserState } from './types/type'
 import { defineStore } from "pinia";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入路由
-import { constantRoute } from "@/router/routes";
+import { constantRoute, asnycRoute, anyRoute } from "@/router/routes";
+import router from '../../router/index'
+
+// 用于过滤当前用户需要展示的异步路由
+function filterAsyncRoute(asnycRoute: any, routes: any) {
+    return asnycRoute.filter((item: any) => {
+        if (routes.includes(item.name)) {
+            if (item.children?.length) {
+                item.children = filterAsyncRoute(item.children, routes)
+            }
+            return true
+        }
+    })
+}
 
 let useUserStore = defineStore('User', {
     // 小仓库存储数据的
@@ -35,6 +48,15 @@ let useUserStore = defineStore('User', {
             if (result.code === 200) {
                 this.username = result.data.name
                 this.avatar = result.data.avatar
+                
+                // 计算当前用户需要展示的路由
+                let userAsyncRoutes = filterAsyncRoute(asnycRoute, result.data.routes)
+                // 菜单需要的数据整理完毕
+                this.menuRoutes = [...constantRoute, ...userAsyncRoutes, anyRoute]
+                // 目前路由器管理的只有常量路由，用户计算完毕异步路由/任意路由动态追加
+                let allRoutes = [...userAsyncRoutes, anyRoute]
+                allRoutes.forEach((route: any) => router.addRoute(route))
+
                 return 'ok'
             } else {
                 return Promise.reject(new Error(result.message))

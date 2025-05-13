@@ -1,3 +1,4 @@
+// 常量路由
 export const constantRoute = [
     {
         path: '/login',
@@ -41,16 +42,6 @@ export const constantRoute = [
         }
     }, 
     {
-        path: '/:pathMatch(.*)*',
-        redirect: '/404',
-        name: 'any',
-        meta: {
-            title: 'any',
-            hidden: true,
-            icon: 'More'
-        }
-    },
-    {
         path: '/screen',
         component: () => import('@/views/screen/index.vue'),
         name: 'screen',
@@ -58,7 +49,10 @@ export const constantRoute = [
             title: '数据大屏',
             icon: 'Platform'
         }
-    },
+    }
+]
+// 异步路由
+export const asnycRoute = [
     {
         path: '/acl',
         component: () => import('@/layout/index.vue'),
@@ -147,3 +141,14 @@ export const constantRoute = [
         }
     }
 ]
+// 任意路由
+export const anyRoute = {
+    path: '/:pathMatch(.*)*',
+    redirect: '/404',
+    name: 'any',
+    meta: {
+        title: 'any',
+        hidden: true,
+        icon: 'More'
+    }
+}
