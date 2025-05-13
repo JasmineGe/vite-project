@@ -8,6 +8,7 @@ map
 import { ref, onMounted } from 'vue';
 import * as echarts from 'echarts'
 import chinaJSON from './china.json'
+import { airplane } from './airplane.ts'
 
  let map = ref()
  echarts.registerMap('china', chinaJSON as any);
@@ -58,7 +59,8 @@ import chinaJSON from './china.json'
                 ],
                 lineStyle: {
                   color: 'white',
-                  width: 5
+                  width: 1,
+                  curveness: 0.2
                 },
               },
               {
@@ -68,7 +70,8 @@ import chinaJSON from './china.json'
                 ],
                 lineStyle: {
                   color: 'white',
-                  width: 5
+                  width: 1,
+                  curveness: 0.2
                 },
               },
               {
@@ -78,7 +81,19 @@ import chinaJSON from './china.json'
                 ],
                 lineStyle: {
                   color: 'white',
-                  width: 5
+                  width: 1,
+                  curveness: 0.2
+                },
+              },
+              {
+                coords: [
+                  [113.280637,23.125178], // 起点
+                  [87.617733,43.792818] // 终点
+                ],
+                lineStyle: {
+                  color: 'white',
+                  width: 1,
+                  curveness: 0.2
                 },
               },
               {
@@ -88,15 +103,17 @@ import chinaJSON from './china.json'
                 ],
                 lineStyle: {
                   color: 'white',
-                  width: 5
+                  width: 1,
+                  curveness: 0.2
                 },
               }
             ],
             effect: {
                 show: true,
-                symbol: 'arrow',
+                symbol: airplane,
                 symbolSize: 15,
-                color: '#fff'
+                color: '#fff',
+                trailLength: 0
             }
         }
     })

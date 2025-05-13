@@ -52,6 +52,7 @@ onBeforeUnmount(() => {
             line-height: 40px;
             color: #29fcff;
             font-size: 20px;
+            cursor: pointer;
         }
     }
     .center {
