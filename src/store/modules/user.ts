@@ -5,7 +5,9 @@ import { defineStore } from "pinia";
 import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 // 引入路由
 import { constantRoute, asnycRoute, anyRoute } from "@/router/routes";
-import router from '../../router/index'
+import router from '@/router'
+// @ts-ignore
+import cloneDeep from 'lodash/cloneDeep'
 
 // 用于过滤当前用户需要展示的异步路由
 function filterAsyncRoute(asnycRoute: any, routes: any) {
@@ -50,7 +52,7 @@ let useUserStore = defineStore('User', {
                 this.avatar = result.data.avatar
                 
                 // 计算当前用户需要展示的路由
-                let userAsyncRoutes = filterAsyncRoute(asnycRoute, result.data.routes)
+                let userAsyncRoutes = filterAsyncRoute(cloneDeep(asnycRoute), result.data.routes)
                 // 菜单需要的数据整理完毕
                 this.menuRoutes = [...constantRoute, ...userAsyncRoutes, anyRoute]
                 // 目前路由器管理的只有常量路由，用户计算完毕异步路由/任意路由动态追加
