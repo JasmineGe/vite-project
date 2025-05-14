@@ -5,17 +5,17 @@
       <el-table style="margin: 10px 0;" border :data="trademarkArr">
         <el-table-column label="序号" width="80px" align="center" type="index"></el-table-column>
         <el-table-column label="品牌名称">
-          <template #="{row, $index}">
+          <template #="{row}">
             <pre>{{ row.tmName }}</pre>
           </template>
         </el-table-column>
         <el-table-column label="品牌LOGO">
-          <template #="{row, $index}">
+          <template #="{row}">
             <img :src="row.logoUrl" alt="未有图片" style="width: 100px; height: 100px;">
           </template>
         </el-table-column>
         <el-table-column label="品牌操作">
-          <template #="{row, $index}">
+          <template #="{row}">
             <el-button v-has="'btn.Trademark.update'" type="warning" size="small" icon="Edit" @click="updateTradeMark(row)"></el-button>
             <el-popconfirm :title="`您确定要删除${row.tmName}吗？`" width="250px" icon="Delete" @confirm="removeTradeMark(row.id)">
               <template #reference>

@@ -1,5 +1,5 @@
 import request from "@/utils/request";
-import type {SpuData, HasSpuResponseData, AllTradeMark, SpuHasImg, SaleAttrResponseData, HasSaleAttrResponseData, skuData, SkuInfoData } from "./type";
+import type {SpuData, HasSpuResponseData, AllTradeMark, SpuHasImg, SaleAttrResponseData, HasSaleAttrResponseData, SkuData, SkuInfoData } from "./type";
 
 enum API {
     // 获取已有SPU数据
@@ -35,6 +35,6 @@ export const reqAddOrUpdateSpu = (data: SpuData) => {
         return request.post<any, any>(API.ADDSPU_URL, data)
     }
 }
-export const reqAddSku = (data: skuData) => request.post<any, any>(API.ADDSKU_URL, data)
+export const reqAddSku = (data: SkuData) => request.post<any, any>(API.ADDSKU_URL, data)
 export const reqSkuList = (spuId: number | string) => request.post<any, SkuInfoData>(API.SKUINFO_URL + spuId)
 export const reqRemoveSpu = (spuId: number | string) => request.delete<any, any>(API.REMOVESPU_URL + spuId)

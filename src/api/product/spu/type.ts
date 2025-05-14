@@ -64,7 +64,9 @@ export interface SaleAttr {
     saleAttrName: string,
     spuSaleAttrValueList: SpuSaleAttrValueList,
     flag?: boolean,
-    saleAttrValue?: string
+    saleAttrValue?: string,
+    saleAttrId?: string | number,
+    saleAttrValueId?: string | number
 }
 export interface SaleAttrResponseData extends ResponseData {
     data: SaleAttr[]
@@ -80,10 +82,10 @@ export interface Attr {
     attrId: string | number,
     valueId: string | number
 }
-export interface SaleAttr {
-    saleAttrId: string | number,
-    saleAttrValueId: string | number
-}
+// export interface SaleAttr {
+//     saleAttrId: string | number,
+//     saleAttrValueId: string | number
+// }
 export interface SkuData {
     category3Id: string | number,
     spuId: string | number,

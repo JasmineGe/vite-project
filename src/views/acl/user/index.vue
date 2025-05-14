@@ -23,7 +23,7 @@
       <el-table-column label="创建时间" align="center" prop="createTime" show-overflow-tooltip></el-table-column>
       <el-table-column label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
       <el-table-column label="操作" width="300px" align="center">
-        <template #="{row, $index}">
+        <template #="{row}">
           <el-button v-has="'btn.User.assign'" type="primary" icon="User" size="small" @click="setRole(row)">分配角色</el-button>
           <el-button v-has="'btn.User.update'" type="warning" icon="Edit" size="small" @click="updateUser(row)">编辑</el-button>
           <el-popconfirm :title="`确定要删除${row.username}吗?`" width="200px" @confirm="deleteUser(row)">

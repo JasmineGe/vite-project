@@ -5,14 +5,14 @@
       <el-table-column label="名称" show-overflow-tooltip width="150px" prop="skuName"></el-table-column>
       <el-table-column label="描述" show-overflow-tooltip width="150px" prop="skuDesc"></el-table-column>
       <el-table-column label="默认图片" width="150px">
-        <template #="{row, $index}">
+        <template #="{row}">
           <img :src="row.skuDefaultImg" style="width: 100px; height: 100px;">
         </template>
       </el-table-column>
       <el-table-column label="重量(g)" width="150px" prop="weight"></el-table-column>
       <el-table-column label="价格(元)" width="150px" prop="price"></el-table-column>
       <el-table-column label="操作" width="250px" fixed="right">
-        <template #="{row, $index}">
+        <template #="{row}">
           <el-button v-has="'btn.Sku.updown'" :type="`row.isSale ? info : success`" size="small" :icon="`row.isSale ? Bottom : Top`" @click="updateSale(row)"></el-button>
           <el-button v-has="'btn.Sku.update'" type="primary" size="small" icon="Edit" @click="updateSku"></el-button>
           <el-button v-has="'btn.Sku.detail'" type="info" size="small" icon="InfoFilled" @click="findSku(row)"></el-button>
@@ -105,7 +105,7 @@ let getHasSku = async (pager = 1) => {
     skuArr.value = result.data.records
   }
 }
-const handler = (pageSize: number) => {
+const handler = () => {
   getHasSku()
 }
 const updateSale = async (row: SkuData) => {

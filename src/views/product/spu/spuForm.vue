@@ -5,7 +5,7 @@
     </el-form-item>
     <el-form-item label="SPU品牌">
         <el-select v-model="spuParams.tmId">
-            <el-option v-for="(item, idx) in allTradeMark" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
+            <el-option v-for="item in allTradeMark" :key="item.id" :label="item.tmName" :value="item.id"></el-option>
         </el-select>
     </el-form-item>
     <el-form-item label="SPU描述">
@@ -36,7 +36,7 @@
             <el-table-column type="index" label="序号" align="center" width="80px"></el-table-column>
             <el-table-column label="属性名" width="100px" prop="saleAttrName"></el-table-column>
             <el-table-column label="属性值">
-                <template #="{row, $index}">
+                <template #="{row}">
                     <el-tag
                         style="margin: 0 5px" 
                         v-for="(item, index) in row.spuSaleAttrValueList" 
@@ -51,8 +51,8 @@
                 </template>
             </el-table-column>
             <el-table-column label="操作" width="100px">
-                <template #="{row, $index}">
-                    <el-button type="danger" size="small" icon="Delete" @click="saleAttr.splice($index, 1)"></el-button>
+                <template #="{$index}">
+                    <el-button type="danger" size="small" icon="Delete" @click="saleAttrList.splice($index, 1)"></el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -138,7 +138,7 @@ let unSelectSaleAttr = computed(() => {
 })
 const addSaleAttr = () => {
     const [baseSaleAttrId, saleAttrName] = saleAttrIdAndValueName.value.split(':')
-    let newSaleAttr:SaleAttr = {
+    let newSaleAttr: SaleAttr = {
         baseSaleAttrId,
         saleAttrName,
         spuSaleAttrValueList: []

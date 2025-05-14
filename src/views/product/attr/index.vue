@@ -8,14 +8,14 @@
           <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>
           <el-table-column label="属性名称" width="120px" prop="attrName"></el-table-column>
           <el-table-column label="属性值名称">
-            <template #="{row, $index}">
-              <el-tag style="margin: 5px;" v-for="(item, idx) in row.attrValueList" :key="item.id">
+            <template #="{row}">
+              <el-tag style="margin: 5px;" v-for="item in row.attrValueList" :key="item.id">
                 {{ item.valueName }}
               </el-tag>
             </template>
           </el-table-column>
           <el-table-column label="操作" width="120px">
-            <template #="{row, $index}">
+            <template #="{row}">
               <el-button v-has="'btn.Attr.update'" type="warning" size="small" icon="Edit" @click="updateAttr(row)"></el-button>
               <el-popconfirm :title="`您确定要删除${row.attrName}吗？`" width="250px" icon="Delete" @confirm="deleteAttr(row.id)">
                 <template #reference>
@@ -43,7 +43,7 @@
             </template>
           </el-table-column>
           <el-table-column label="操作">
-            <template #="{row, $index}">
+            <template #="{$index}">
               <el-button type="danger" size="small" icon="Delete" @click="attrParams.attrValueList.splice($index, 1)"></el-button>
             </template>
           </el-table-column>

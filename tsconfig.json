@@ -10,6 +10,8 @@
       //路径映射，相对于baseUrl
       "@/*": ["src/*"]
     },
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false,
+    "typeRoots": ["./node_modules/@types", "./types"]
   },
 }

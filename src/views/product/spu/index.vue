@@ -10,8 +10,8 @@
           <el-table-column label="SPU名称" prop="spuName"></el-table-column>
           <el-table-column label="SPU描述" prop="description" show-overflow-tooltip></el-table-column>
           <el-table-column label="操作">
-            <template #="{row, $index}">
-              <el-button v-has="'btn.Spu.addSku'" size="small" type="primary" icon="Plus" title="添加SKU" @click="addSku(row)"></el-button>
+            <template #="{row}">
+              <el-button v-has="'btn.Spu.addsku'" size="small" type="primary" icon="Plus" title="添加SKU" @click="addSku(row)"></el-button>
               <el-button v-has="'btn.Spu.update'" size="small" type="warning" icon="Edit" title="修改SPU" @click="updateSpu(row)"></el-button>
               <el-button v-has="'btn.Spu.skus'" size="small" type="info" icon="View" title="查看SKU列表" @click="findSku(row)"></el-button>
               <el-popconfirm :title="`确定要删除${row.spuName}吗?`" width="200px">
@@ -41,7 +41,7 @@
           <el-table-column label="sku价格" prop="price"></el-table-column>
           <el-table-column label="sku重量" prop="weight"></el-table-column>
           <el-table-column label="sku图片">
-            <template #="{row, $index}">
+            <template #="{row}">
               <img :src="row.skuDefaultImg" style="width:100px; height: 100px;">
             </template>
           </el-table-column>

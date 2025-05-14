@@ -4,7 +4,7 @@
     <el-table-column prop="code" label="权限值" />
     <el-table-column prop="updateTime" label="修改时间" />
     <el-table-column prop="address" label="操作">
-      <template #="{row, $index}">
+      <template #="{row}">
         <el-button v-has="'btn.Permission.add'" type="primary" size="small" @click="addPermission(row)" :disabled="row.level === 4">{{ row.level === 3 ? '添加功能' : '添加菜单' }}</el-button>
         <el-button v-has="'btn.Permission.update'" type="warning" size="small" @click="updatePermission(row)" :disabled="row.level === 1">编辑</el-button>
         <el-popconfirm :title="`确定要删除${row.name}吗?`" width="200px" @confirm="deletePermission(row)">
