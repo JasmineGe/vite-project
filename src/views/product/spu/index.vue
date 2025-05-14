@@ -4,19 +4,19 @@
     <el-card style="margin: 10px 0;">
       <!-- v-if/v-show 都可实现切换，v-show只需要挂载一次 -->
       <div v-show="scene === 0">
-        <el-button type="primary" icon="Plus" :disabled="!categoryStore.c3Id" @click="addSpu">添加SPU</el-button>
+        <el-button v-has="'btn.Spu.add'" type="primary" icon="Plus" :disabled="!categoryStore.c3Id" @click="addSpu">添加SPU</el-button>
         <el-table border style="margin: 10px 0;" :data="records">
           <el-table-column label="序号" type="index" align="center" width="80px"></el-table-column>
           <el-table-column label="SPU名称" prop="spuName"></el-table-column>
           <el-table-column label="SPU描述" prop="description" show-overflow-tooltip></el-table-column>
           <el-table-column label="操作">
             <template #="{row, $index}">
-              <el-button size="small" type="primary" icon="Plus" title="添加SKU" @click="addSku(row)"></el-button>
-              <el-button size="small" type="warning" icon="Edit" title="修改SPU" @click="updateSpu(row)"></el-button>
-              <el-button size="small" type="info" icon="View" title="查看SKU列表" @click="findSku(row)"></el-button>
+              <el-button v-has="'btn.Spu.addSku'" size="small" type="primary" icon="Plus" title="添加SKU" @click="addSku(row)"></el-button>
+              <el-button v-has="'btn.Spu.update'" size="small" type="warning" icon="Edit" title="修改SPU" @click="updateSpu(row)"></el-button>
+              <el-button v-has="'btn.Spu.skus'" size="small" type="info" icon="View" title="查看SKU列表" @click="findSku(row)"></el-button>
               <el-popconfirm :title="`确定要删除${row.spuName}吗?`" width="200px">
                 <template #reference>
-                  <el-button size="small" type="danger" icon="Delete" title="删除SPU" @click="deleteSpu(row)"></el-button>
+                  <el-button v-has="'btn.Spu.delete'" size="small" type="danger" icon="Delete" title="删除SPU" @click="deleteSpu(row)"></el-button>
                 </template>
               </el-popconfirm>
             </template>

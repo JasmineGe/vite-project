@@ -11,8 +11,8 @@
     </el-form>
   </el-card>
   <el-card style="margin: 10px 0;">
-    <el-button type="primary" @click="addUser">添加</el-button>
-    <el-button type="danger" :disabled="!selectUser.length" @click="deleteSelectUser">批量删除</el-button>
+    <el-button v-has="'btn.User.add'" type="primary" @click="addUser">添加</el-button>
+    <el-button v-has="'btn.User.remove'" type="danger" :disabled="!selectUser.length" @click="deleteSelectUser">批量删除</el-button>
     <el-table style="margin: 10px 0;" border :data="userArr" @selection-change="selectChange">
       <el-table-column type="selection" align="center"></el-table-column>
       <el-table-column label="#" align="center" type="index"></el-table-column>
@@ -24,11 +24,11 @@
       <el-table-column label="更新时间" align="center" prop="updateTime" show-overflow-tooltip></el-table-column>
       <el-table-column label="操作" width="300px" align="center">
         <template #="{row, $index}">
-          <el-button type="primary" icon="User" size="small" @click="setRole(row)">分配角色</el-button>
-          <el-button type="warning" icon="Edit" size="small" @click="updateUser(row)">编辑</el-button>
+          <el-button v-has="'btn.User.assign'" type="primary" icon="User" size="small" @click="setRole(row)">分配角色</el-button>
+          <el-button v-has="'btn.User.update'" type="warning" icon="Edit" size="small" @click="updateUser(row)">编辑</el-button>
           <el-popconfirm :title="`确定要删除${row.username}吗?`" width="200px" @confirm="deleteUser(row)">
             <template #reference>
-              <el-button size="small" type="danger" icon="Delete">删除</el-button>
+              <el-button v-has="'btn.User.remove'" size="small" type="danger" icon="Delete">删除</el-button>
             </template>
           </el-popconfirm>
         </template>
@@ -162,6 +162,7 @@ const confirm = async () => {
   // 保证表单验证通过，才可发请求
   await formRef.value.validate()
   let result:any = await reqAddOrUpdateUser(userParams)
+  console.log(result)
   if (result?.code === 200) {
     ElMessage.success(userParams.id ? '更新成功！' : '添加成功！')
     drawer.value = false

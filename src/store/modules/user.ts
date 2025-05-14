@@ -23,12 +23,14 @@ function filterAsyncRoute(asnycRoute: any, routes: any) {
 
 let useUserStore = defineStore('User', {
     // 小仓库存储数据的
-    state: ():UserState => {
+    state: (): UserState => {
         return {
             token: GET_TOKEN(), // 用户唯一标识 token
             menuRoutes: constantRoute, //仓库存储菜单需要生成的数组
             username: '',
-            avatar: ''
+            avatar: '',
+            // 存储当前用户是否包含某一个按钮
+            buttons: []
         }
     },
     // 处理异步逻辑的地方
@@ -50,6 +52,7 @@ let useUserStore = defineStore('User', {
             if (result.code === 200) {
                 this.username = result.data.name
                 this.avatar = result.data.avatar
+                this.buttons = result.data.buttons
                 
                 // 计算当前用户需要展示的路由
                 let userAsyncRoutes = filterAsyncRoute(cloneDeep(asnycRoute), result.data.routes)

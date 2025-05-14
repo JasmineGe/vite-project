@@ -16,6 +16,8 @@ import pinia from "./store";
 import './permission'
 // 暗黑模式需要的样式
 import 'element-plus/theme-chalk/dark/css-vars.css'
+// 引入自定义指令
+import { isHasButton } from "@/directive/has";
 // 获取应用的实例对象
 const app = createApp(App);
 // 安装element-plus插件
@@ -26,6 +28,7 @@ app.use(ElementPlus, {
 app.use(globalComponent);
 app.use(pinia)
 app.use(router)
+app.use(isHasButton)
 
 // 将应用挂载到挂载点上
 app.mount("#app");

@@ -5,11 +5,11 @@
     <el-table-column prop="updateTime" label="修改时间" />
     <el-table-column prop="address" label="操作">
       <template #="{row, $index}">
-        <el-button type="primary" size="small" @click="addPermission(row)" :disabled="row.level === 4">{{ row.level === 3 ? '添加功能' : '添加菜单' }}</el-button>
-        <el-button type="warning" size="small" @click="updatePermission(row)" :disabled="row.level === 1">编辑</el-button>
+        <el-button v-has="'btn.Permission.add'" type="primary" size="small" @click="addPermission(row)" :disabled="row.level === 4">{{ row.level === 3 ? '添加功能' : '添加菜单' }}</el-button>
+        <el-button v-has="'btn.Permission.update'" type="warning" size="small" @click="updatePermission(row)" :disabled="row.level === 1">编辑</el-button>
         <el-popconfirm :title="`确定要删除${row.name}吗?`" width="200px" @confirm="deletePermission(row)">
             <template #reference>
-              <el-button type="danger" size="small" :disabled="row.level === 1">删除</el-button>
+              <el-button v-has="'btn.Permission.remove'" type="danger" size="small" :disabled="row.level === 1">删除</el-button>
             </template>
           </el-popconfirm>
       </template>
