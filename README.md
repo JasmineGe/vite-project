@@ -16,3 +16,8 @@
 5. 掌握请求响应拦截器该如何二次封装
 6. 掌握 svg 矢量图如何在项目中使用
 7. 掌握主题颜色切换与暗黑模式的切换 .......
+
+# 3. 打包发布
+    npm run build
+    npm install -g serve
+    serve dist
