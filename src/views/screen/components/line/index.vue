@@ -11,7 +11,8 @@
 </template>
 
 <script setup lang='ts'>
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+import echarts from '@/utils/echarts.ts';
 import { ref, onMounted } from 'vue';
 
 let line = ref()

@@ -14,7 +14,8 @@
 
 <script setup lang='ts'>
 import { ref, onMounted } from 'vue';
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+import echarts from '@/utils/echarts.ts';
 import 'echarts-liquidfill'
 
 let people = ref('216908人')

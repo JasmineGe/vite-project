@@ -6,7 +6,8 @@ map
 
 <script setup lang='ts'>
 import { ref, onMounted } from 'vue';
-import * as echarts from 'echarts'
+import echarts from '@/utils/echarts.ts';
+// import * as echarts from 'echarts'
 import chinaJSON from './china.json'
 import { airplane } from './airplane.ts'
 
