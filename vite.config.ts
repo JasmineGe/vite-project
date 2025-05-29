@@ -4,6 +4,7 @@ import path from "path";
 import { createSvgIconsPlugin } from "vite-plugin-svg-icons";
 import { viteMockServe } from 'vite-plugin-mock'
 import { visualizer } from 'rollup-plugin-visualizer'
+import viteCompression from 'vite-plugin-compression'
 
 // https://vite.dev/config/
 // command用于获取当前开发环境
@@ -20,7 +21,16 @@ export default defineConfig(async ({command, mode}) => {
       viteMockServe({
         localEnabled: command === 'serve', // 保证开发环境阶段可以使用mock接口
       }),
-      visualizer({ open: true }) as PluginOption
+      // 自动开启分析页面
+      visualizer({ open: true }) as PluginOption,
+      viteCompression({
+        verbose: true,
+        disable: false,
+        threshold: 10240,
+        algorithm: 'gzip', // gzip/brotliCompress
+        ext: '.gz', //gz/br
+        deleteOriginFile: false, // 压缩后是否删除压缩源文件
+      })
     ],
     // scss全局变量的配置
     css: {
@@ -50,22 +60,27 @@ export default defineConfig(async ({command, mode}) => {
       }
     },
     build: {
-      // minify: 'terser',
-      // outDir: env.VITE_OUT_DIR || 'dist',
-      // sourcemap: false,
-      // terserOptions: {
-      //   compress: {
-      //     drop_console: true,
-      //     drop_debugger: true
-      //   }
-      // },
-      // chunkSizeWarningLimit: 1500,
+      publicPath: './',
+      // 关闭生产map文件，可以达到缩小打包体积
+      // 这个生产环境一定要关闭，不然打包的产物会很大
+      sourcemap: false,
+      // 关闭文件计算
+      reportCompressedSize: false,
+      chunkSizeWarningLimit: 1600,
+      terserOptions: {
+        compress: {
+          // 生产环境时移除console debugger
+          drop_console: true,
+          drop_debugger: true
+        }
+      },
       rollupOptions:{
         output:{
+          // 最小化拆分包
           manualChunks(id: any) {
-            // 将 node_modules 中的依赖打包到 vendor.js
+            // 将 node_modules 中的依赖打包
             if (id.includes('node_modules')) {
-              return 'vendor';
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
             }
             // 自定义分包规则，例如将 lodash 单独打包
             if (id.includes('lodash')) {
@@ -75,7 +90,13 @@ export default defineConfig(async ({command, mode}) => {
             if (id.includes('src/pages/')) {
               return 'pages';
             }
-          }
+          },
+          // 引入文件名的名称
+          chunkFileNames: 'js/[name]-[hash].js',
+          // 包的入口文件名称
+          entryFileNames: 'js/[name]-[hash].js',
+          // 资源文件如字体，图片等
+          assetFileNames: '[ext]/[name]-[hash].[ext]',
         }
       }
     },
