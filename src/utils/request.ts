@@ -8,10 +8,10 @@ const request = axios.create({
     timeout: 5000
 })
 request.interceptors.request.use((config) => {
-    // config 配置对象，headers属性请求头,经常给服务器端携带公共参数
     let userStore = useUserStore()
     if(userStore.token) {
         config.headers.token = userStore.token
+        config.headers.Authorization = `Bearer ${userStore.token}`
     }
     return config
 })

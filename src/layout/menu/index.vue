@@ -43,7 +43,3 @@ const goRoute = (vc:any) => {
     $router.push(vc.index)
 }
 </script>
-
-<style scoped>
-
-</style>

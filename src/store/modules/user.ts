@@ -7,7 +7,7 @@ import { SET_TOKEN, GET_TOKEN, REMOVE_TOKEN } from '@/utils/token'
 import { constantRoute, asnycRoute, anyRoute } from "@/router/routes";
 import router from '@/router'
 // @ts-ignore
-import cloneDeep from 'lodash/cloneDeep'
+import { cloneDeep } from 'lodash-es'
 
 // 用于过滤当前用户需要展示的异步路由
 function filterAsyncRoute(asnycRoute: any, routes: any) {

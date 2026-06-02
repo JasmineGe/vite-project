@@ -51,6 +51,7 @@ let userStore = useUserStore()
         }
     }
     .layout_tabbar {
+        background-color: #fff;
         width: calc(100% - $base-menu-width);
         height: $base-tabbar-height;
         transition: all .3s;
@@ -63,6 +64,7 @@ let userStore = useUserStore()
         }
     }
     .layout_main {
+        background-color: #fff;
         position: absolute;
         left: $base-menu-width;
         top: $base-tabbar-height;

@@ -1,6 +1,6 @@
 <template>
-    <el-icon style="margin-right: 10px;" @click="changeIcon">
-        <component :is="layoutSettingStore.fold ? 'Fold' : 'Expand'"></component>
+    <el-icon style="margin-right: 10px; cursor: pointer;" @click="changeIcon">
+        <component :is="!layoutSettingStore.fold ? 'Fold' : 'Expand'"></component>
     </el-icon>
     <el-breadcrumb separator-icon="ArrowRight">
         <el-breadcrumb-item v-for="(item, idx) in $route.matched" :key="idx" :to="item.path" v-show="item.meta.title">
